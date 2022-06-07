@@ -1,58 +1,49 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+    
+        <div class="login-wrapper fadeInDown animated">
+            <div class="logo">
+                <a href="{{ url('/') }}">
+                    <img src="{{ asset('public/images/logo.png') }}"  alt="Logo" >
+                </a>
+            </div>
+            
+            <form method="POST" action="{{ route('login') }}" class="lobi-form login-form visible" id="form" >
+                @csrf
+                <div class="login-header">
+                    Login Admin
+                </div>
+                <div class="login-body no-padding">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <label class="input">
+                                <span class="input-icon input-icon-prepend fa fa-user"></span>
+                                <input id="email" type="email" class="form-control placeholder-no-fix @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="E-mail">
+                                <span class="tooltip tooltip-top-left"><i class="fa fa-user text-cyan-dark"></i> Please enter the email</span>
+                            </label>
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Password</label>
+                            <label class="input">
+                                <span class="input-icon input-icon-prepend fa fa-key"></span>
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                                <span class="tooltip tooltip-top-left"><i class="fa fa-key text-cyan-dark"></i> Please enter your password</span>
+                            </label>
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
-
-                        <div class="row mb-3">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
+                        
+                        <div class="form-group">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
@@ -62,12 +53,11 @@
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
-                            </div>
-                        </div>
-                    </form>
+                            
+                        </div>                        
+                    </fieldset>
                 </div>
-            </div>
+            </form>
         </div>
-    </div>
-</div>
+    
 @endsection
